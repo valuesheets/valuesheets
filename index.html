@@ -601,6 +601,8 @@
     content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
     background: linear-gradient(90deg, transparent, rgba(46,204,113,.4), transparent);
   }
+  .footer-simple { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 36px; text-align: center; }
+  .footer-tagline { color: #CBD5E1; font-size: 15px; font-weight: 600; max-width: 520px; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
   footer h4 { color: #fff; font-size: 14px; margin-bottom: 16px; letter-spacing: .06em; text-transform: uppercase; font-weight: 800; }
   footer a { color: #94A3B8; display: block; padding: 5px 0; font-size: 14px; transition: color .2s, transform .2s; }
@@ -972,26 +974,11 @@
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="brand" aria-label="ValueSheets">
-          <img class="brand-logo-img" src="assets/logo.jpg" alt="ValueSheets" />
-        </a>
-        <p>Kelola Bisnis Lebih Cerdas. Raih Hasil Lebih Baik. Template Excel profesional untuk freelancer dan pelaku bisnis kecil di Indonesia.</p>
-      </div>
-      <div>
-        <h4>Navigasi</h4>
-        <a href="#produk">Produk</a>
-        <a href="#fitur">Fitur</a>
-        <a href="#review">Review</a>
-        <a href="#harga">Harga</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      <div>
-        <h4>Toko Resmi</h4>
-        <a href="https://lynk.id/valuesheets/d3ddd94dwk91" target="_blank" rel="noopener">lynk.id/valuesheets</a>
-        <a href="https://lynk.id/valuesheets/d3ddd94dwk91" target="_blank" rel="noopener">Dapatkan Template</a>
-      </div>
+    <div class="footer-simple">
+      <a href="#" class="brand" aria-label="ValueSheets">
+        <img class="brand-logo-img" src="assets/logo.jpg" alt="ValueSheets" />
+      </a>
+      <p class="footer-tagline">Kelola Bisnis Lebih Cerdas. Raih Hasil Lebih Baik.</p>
     </div>
     <div class="footer-bottom">
       <span>© 2026 VALUESHEETS. Semua hak cipta dilindungi.</span>
