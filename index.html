@@ -429,22 +429,49 @@
   .step p { color: var(--gray-text); font-size: 15px; }
   @media (max-width: 800px) { .steps { grid-template-columns: 1fr; } }
 
-  /* ===== REVIEWS ===== */
+  /* ===== REVIEWS (SLIDER) ===== */
+  .reviews-slider-wrap { position: relative; }
   .reviews-grid {
-    column-count: 3; column-gap: 24px;
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 10px 4px 30px;
+    margin: 0 -4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--green) rgba(17,24,39,.08);
   }
+  .reviews-grid::-webkit-scrollbar { height: 10px; }
+  .reviews-grid::-webkit-scrollbar-track { background: rgba(17,24,39,.06); border-radius: 10px; }
+  .reviews-grid::-webkit-scrollbar-thumb { background: var(--grad-green); border-radius: 10px; }
   .review-card {
     background: var(--grad-white); border-radius: var(--radius); padding: 30px 28px 24px;
     box-shadow: var(--shadow-3d-md);
     border: 1px solid rgba(255,255,255,.9);
     position: relative;
     transition: transform .35s, box-shadow .35s;
-    break-inside: avoid;
-    display: inline-block;
-    width: 100%;
-    margin: 0 0 24px;
-    vertical-align: top;
+    flex: 0 0 360px;
+    scroll-snap-align: start;
   }
+  .slider-nav {
+    display: flex; justify-content: center; gap: 14px; margin-top: 10px;
+  }
+  .slider-btn {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--grad-white); border: 0; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--green-dark); font-size: 22px; font-weight: 900;
+    box-shadow:
+      0 1px 0 #fff inset,
+      0 -3px 0 rgba(17,24,39,.08) inset,
+      0 8px 16px rgba(17,24,39,.12),
+      0 2px 4px rgba(17,24,39,.08);
+    transition: transform .15s ease, box-shadow .25s ease;
+  }
+  .slider-btn:hover { transform: translateY(-3px); color: #fff; background: var(--grad-green-btn); box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 10px 20px rgba(21,128,61,.35); }
+  .slider-btn:active { transform: translateY(2px); }
+  @media (max-width: 640px) { .review-card { flex: 0 0 85%; } }
   .review-card::before {
     content: "“";
     position: absolute; top: -8px; left: 22px;
@@ -506,8 +533,6 @@
     backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.9);
     box-shadow: 0 4px 10px rgba(17,24,39,.05);
   }
-  @media (max-width: 900px) { .reviews-grid { column-count: 2; } }
-  @media (max-width: 640px) { .reviews-grid { column-count: 1; } }
 
   /* ===== PRICING ===== */
   .pricing-wrap { display: flex; justify-content: center; perspective: 1200px; }
@@ -793,118 +818,69 @@
       <h2>Apa Kata Pengguna VALUESHEETS?</h2>
       <p>Lihat contoh bagaimana VALUESHEETS dirancang untuk membantu freelancer mengelola bisnis dengan lebih terorganisir.</p>
     </div>
-    <div class="reviews-grid">
+    <div class="reviews-slider-wrap">
+      <div class="reviews-grid" id="reviewsSlider">
 
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Invoice jadi jauh lebih rapi</div>
-        <p class="review-body">Dulu saya sering lupa menagih klien dan harus bongkar chat lama. Dengan VALUESHEETS, semua invoice tercatat otomatis dan saya tahu persis mana yang sudah lunas.</p>
-        <div class="review-author">
-          <div class="avatar c1">AP</div>
-          <div><div class="author-name">Andi Pratama</div><div class="author-role">Freelancer Graphic Designer</div></div>
+        <div class="review-card">
+          <span class="review-badge">Contoh Review</span>
+          <div class="stars">★★★★★</div>
+          <div class="review-title">Invoice jadi jauh lebih rapi</div>
+          <p class="review-body">Dulu saya sering lupa menagih klien dan harus bongkar chat lama. Dengan VALUESHEETS, semua invoice tercatat otomatis dan saya tahu persis mana yang sudah lunas.</p>
+          <div class="review-author">
+            <div class="avatar c1">AP</div>
+            <div><div class="author-name">Andi Pratama</div><div class="author-role">Freelancer Graphic Designer</div></div>
+          </div>
         </div>
-      </div>
 
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Keuangan akhirnya terkontrol</div>
-        <p class="review-body">Sebagai digital marketer, saya punya banyak klien dengan skema bayar berbeda. Template ini membantu saya memantau arus kas dan tahu keuntungan bersih setiap bulan.</p>
-        <div class="review-author">
-          <div class="avatar c2">SA</div>
-          <div><div class="author-name">Sarah Amelia</div><div class="author-role">Digital Marketer</div></div>
+        <div class="review-card">
+          <span class="review-badge">Contoh Review</span>
+          <div class="stars">★★★★★</div>
+          <div class="review-title">Keuangan akhirnya terkontrol</div>
+          <p class="review-body">Sebagai digital marketer, saya punya banyak klien dengan skema bayar berbeda. Template ini membantu saya memantau arus kas dan tahu keuntungan bersih setiap bulan.</p>
+          <div class="review-author">
+            <div class="avatar c2">SA</div>
+            <div><div class="author-name">Sarah Amelia</div><div class="author-role">Digital Marketer</div></div>
+          </div>
         </div>
-      </div>
 
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Hemat waktu urus administrasi</div>
-        <p class="review-body">Saya lebih fokus coding karena pencatatan proyek dan tagihan sudah otomatis. Dashboard-nya cukup dilihat sekilas sudah tahu kondisi keuangan bisnis.</p>
-        <div class="review-author">
-          <div class="avatar c3">RR</div>
-          <div><div class="author-name">Rizky Ramadhan</div><div class="author-role">Web Developer</div></div>
+        <div class="review-card">
+          <span class="review-badge">Contoh Review</span>
+          <div class="stars">★★★★★</div>
+          <div class="review-title">Hemat waktu urus administrasi</div>
+          <p class="review-body">Saya lebih fokus coding karena pencatatan proyek dan tagihan sudah otomatis. Dashboard-nya cukup dilihat sekilas sudah tahu kondisi keuangan bisnis.</p>
+          <div class="review-author">
+            <div class="avatar c3">RR</div>
+            <div><div class="author-name">Rizky Ramadhan</div><div class="author-role">Web Developer</div></div>
+          </div>
         </div>
-      </div>
 
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Simpel tapi lengkap</div>
-        <p class="review-body">Sebagai content creator, saya nggak suka tools yang ribet. VALUESHEETS pas banget — tinggal isi dan semua laporan muncul otomatis. Suka banget tampilannya!</p>
-        <div class="review-author">
-          <div class="avatar c4">NP</div>
-          <div><div class="author-name">Nadia Putri</div><div class="author-role">Content Creator</div></div>
+        <div class="review-card">
+          <span class="review-badge">Contoh Review</span>
+          <div class="stars">★★★★★</div>
+          <div class="review-title">Simpel tapi lengkap</div>
+          <p class="review-body">Sebagai content creator, saya nggak suka tools yang ribet. VALUESHEETS pas banget — tinggal isi dan semua laporan muncul otomatis. Suka banget tampilannya!</p>
+          <div class="review-author">
+            <div class="avatar c4">NP</div>
+            <div><div class="author-name">Nadia Putri</div><div class="author-role">Content Creator</div></div>
+          </div>
         </div>
-      </div>
 
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Pengelolaan klien jadi profesional</div>
-        <p class="review-body">Dashboard analisis klien membantu saya tahu klien mana yang paling menguntungkan. Jadi lebih mudah menentukan prioritas kerja ke depan.</p>
-        <div class="review-author">
-          <div class="avatar c5">FM</div>
-          <div><div class="author-name">Fajar Maulana</div><div class="author-role">Freelance Consultant</div></div>
+        <div class="review-card">
+          <span class="review-badge">Contoh Review</span>
+          <div class="stars">★★★★★</div>
+          <div class="review-title">Pengelolaan klien jadi profesional</div>
+          <p class="review-body">Dashboard analisis klien membantu saya tahu klien mana yang paling menguntungkan. Jadi lebih mudah menentukan prioritas kerja ke depan.</p>
+          <div class="review-author">
+            <div class="avatar c5">FM</div>
+            <div><div class="author-name">Fajar Maulana</div><div class="author-role">Freelance Consultant</div></div>
+          </div>
         </div>
-      </div>
 
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Cocok untuk VA seperti saya</div>
-        <p class="review-body">Saya menangani beberapa klien sekaligus. Tracking proyek dan jadwal di VALUESHEETS membuat semua tugas tetap on-time. Sangat membantu produktivitas harian.</p>
-        <div class="review-author">
-          <div class="avatar c6">DM</div>
-          <div><div class="author-name">Dinda Maharani</div><div class="author-role">Virtual Assistant</div></div>
-        </div>
       </div>
-
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Rapi, modern, dan mudah dibaca</div>
-        <p class="review-body">Sebagai UI/UX designer, saya cukup picky soal tampilan. VALUESHEETS enak dilihat dan strukturnya rapi. Monitoring keuntungan jadi menyenangkan.</p>
-        <div class="review-author">
-          <div class="avatar c7">KW</div>
-          <div><div class="author-name">Kevin Wijaya</div><div class="author-role">UI/UX Designer</div></div>
-        </div>
+      <div class="slider-nav">
+        <button class="slider-btn" type="button" aria-label="Review sebelumnya" onclick="document.getElementById('reviewsSlider').scrollBy({left: -380, behavior: 'smooth'})">←</button>
+        <button class="slider-btn" type="button" aria-label="Review berikutnya" onclick="document.getElementById('reviewsSlider').scrollBy({left: 380, behavior: 'smooth'})">→</button>
       </div>
-
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Semua catatan di satu tempat</div>
-        <p class="review-body">Dulu catatan konten dan tagihan saya tersebar di banyak file. Sekarang semuanya ada di satu dashboard. Jauh lebih tenang menjalankan bisnis.</p>
-        <div class="review-author">
-          <div class="avatar c8">AS</div>
-          <div><div class="author-name">Alya Safitri</div><div class="author-role">Social Media Specialist</div></div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Monitoring untung lebih akurat</div>
-        <p class="review-body">Saya akhirnya tahu proyek pemotretan mana yang paling menguntungkan setelah dikurangi biaya operasional. Membuka mata soal pengelolaan bisnis.</p>
-        <div class="review-author">
-          <div class="avatar c9">RF</div>
-          <div><div class="author-name">Reza Firmansyah</div><div class="author-role">Freelance Photographer</div></div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <span class="review-badge">Contoh Review</span>
-        <div class="stars">★★★★★</div>
-        <div class="review-title">Membantu bisnis online saya</div>
-        <p class="review-body">Pemilik usaha kecil wajib punya template seperti ini. Laporan laba rugi, arus kas, dan pengeluaran langsung terhitung otomatis. Hemat banyak waktu administrasi.</p>
-        <div class="review-author">
-          <div class="avatar c10">MA</div>
-          <div><div class="author-name">Michelle Ananda</div><div class="author-role">Online Business Owner</div></div>
-        </div>
-      </div>
-
     </div>
     <p class="reviews-disclaimer">
       <strong>Catatan:</strong> Seluruh review di atas merupakan konten demonstrasi dengan nama fiktif untuk kebutuhan tampilan desain, bukan testimoni pelanggan asli. Konten ini dapat diganti dengan review pelanggan sebenarnya di kemudian hari.
