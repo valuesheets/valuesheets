@@ -947,6 +947,58 @@ footer .logo-small img {
   letter-spacing: 0.08em;
 }
 
+/* ============ SOLD OUT STATE ============ */
+body.sale-over .cta-btn {
+  background: linear-gradient(135deg, #5B7A99, #3A4A5F) !important;
+  animation: none !important;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+  color: rgba(255,255,255,0.95);
+}
+body.sale-over .cta-btn::before { display: none }
+body.sale-over .cta-btn .cta-icon,
+body.sale-over .cta-btn .cta-label { display: none }
+body.sale-over .cta-btn::after {
+  content: '🚫 PRODUK SUDAH HABIS';
+  font-weight: 800; letter-spacing: 0.02em;
+}
+body.sale-over .price-now {
+  color: var(--fg3);
+  text-shadow: none;
+  text-decoration: line-through;
+  text-decoration-thickness: 3px;
+}
+body.sale-over .price-save { opacity: 0.4 }
+body.sale-over .stock-left { color: var(--fg3) !important }
+body.sale-over .stock-left .stock-inner { display: none !important }
+body.sale-over .stock-left .stock-sold { display: inline !important; font-weight: 800 }
+body.sale-over .stock-fill {
+  background: linear-gradient(90deg, #5B7A99, #3A4A5F) !important;
+  box-shadow: none !important;
+}
+body.sale-over .stock-fill::after { display: none }
+body.sale-over #timer-status-msg {
+  background: rgba(220,38,38,0.85);
+  color: #fff;
+}
+.sold-out-banner {
+  display: none;
+  background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(220,38,38,0.05));
+  border: 1px solid rgba(220,38,38,0.4);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 22px;
+  text-align: center;
+}
+body.sale-over .sold-out-banner { display: block }
+.sold-out-banner strong {
+  color: #FF7B73; font-size: 1.05rem; font-weight: 800;
+  display: block; margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+.sold-out-banner span { color: var(--fg2); font-size: 0.85rem }
+
 /* ============ CONTENT KIT ============ */
 .kit-bg {
   background: rgba(255,255,255,0.02);
@@ -1027,7 +1079,7 @@ footer .logo-small img {
 <div id="sale-ended-overlay">
   <div style="font-size:3rem">⏰</div>
   <h3>Flash Sale Telah Berakhir</h3>
-  <p data-sale-date="Waktu flash sale sudah habis ({TANGGAL}, 22.30 WIB). Harga kembali ke Rp150.000.">Waktu flash sale sudah habis hari ini pukul 22.30 WIB. Harga kembali ke Rp150.000.</p>
+  <p data-sale-date="Waktu flash sale sudah habis ({TANGGAL}, 22.00 WIB). Harga kembali ke Rp150.000.">Waktu flash sale sudah habis hari ini pukul 22.00 WIB. Harga kembali ke Rp150.000.</p>
   <a href="https://lynk.id/valuesheets/d3ddd94dwk91" target="_blank" rel="noopener" style="margin-top:12px;background:var(--green);color:#fff;padding:14px 28px;border-radius:12px;font-weight:700;text-decoration:none;font-size:0.95rem;">Beli dengan Harga Normal →</a>
 </div>
 
@@ -1066,7 +1118,7 @@ footer .logo-small img {
     </div>
     <div class="logo-tagline">Personal Finance Indonesia</div>
 
-    <div class="badge" style="margin-top:22px"><span class="dot"></span><span data-sale-date="Flash Sale · {TANGGAL} · Jam 12.00–22.30 WIB">Flash Sale · Hari Ini · Jam 12.00–22.30 WIB</span></div>
+    <div class="badge" style="margin-top:22px"><span class="dot"></span><span data-sale-date="Flash Sale · {TANGGAL} · Jam 12.00–22.00 WIB">Flash Sale · Hari Ini · Jam 12.00–22.00 WIB</span></div>
 
     <h1>Kelola Keuangan<br>Seperti <em>Seorang CFO</em><br>dengan Satu File Excel</h1>
     <p class="hero-sub">Template keuangan pribadi paling lengkap di Indonesia — PPh 21 otomatis, BPJS terintegrasi, dashboard real-time. Dibuat khusus untuk regulasi Indonesia 2024. Sekali beli, pakai seumur hidup.</p>
@@ -1152,18 +1204,23 @@ footer .logo-small img {
     <!-- STOCK -->
     <div class="stock-wrap">
       <div class="stock-info">
-        <span class="stock-left">🔥 Tersisa <strong id="stock-num">800</strong> dari 800 slot</span>
+        <span class="stock-left"><span class="stock-inner">🔥 Tersisa <strong id="stock-num">800</strong> dari 800 slot</span><span class="stock-sold" style="display:none">Produk sudah habis</span></span>
         <span class="stock-pct" id="stock-pct">0% terjual</span>
       </div>
       <div class="stock-track">
         <div class="stock-fill" id="stock-fill" style="width:0%"></div>
       </div>
-      <div class="stock-note" data-sale-date="⏰ Flash sale berakhir {TANGGAL} pukul 22.30 WIB. Harga naik ke Rp150.000 setelah itu.">⏰ Flash sale berakhir hari ini pukul 22.30 WIB. Harga naik ke Rp150.000 setelah itu.</div>
+      <div class="stock-note" data-sale-date="⏰ Flash sale berakhir {TANGGAL} pukul 22.00 WIB. Harga naik ke Rp150.000 setelah itu.">⏰ Flash sale berakhir hari ini pukul 22.00 WIB. Harga naik ke Rp150.000 setelah itu.</div>
+    </div>
+
+    <div class="sold-out-banner">
+      <strong>🚫 Produk Sudah Habis</strong>
+      <span>Flash sale telah berakhir. 800 slot sudah terjual semua. Nantikan restock berikutnya.</span>
     </div>
 
     <a class="cta-btn" href="https://lynk.id/valuesheets/d3ddd94dwk91" target="_blank" rel="noopener">
       <span class="cta-icon">⚡</span>
-      BELI SEKARANG — Rp50.000
+      <span class="cta-label">BELI SEKARANG — Rp50.000</span>
     </a>
     <div class="cta-sub">
       <span class="ok">✓ Download instan</span>
@@ -1403,7 +1460,7 @@ footer .logo-small img {
       </div>
       <div class="faq-item">
         <div class="faq-q">Kenapa harganya hanya Rp50.000? <span class="faq-arr">▼</span></div>
-        <div class="faq-a" data-sale-date="Ini flash sale 1 hari eksklusif ({TANGGAL}, pukul 12.00–22.30 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp150.000 dan tidak ada diskon tambahan.">Ini flash sale 1 hari eksklusif (hari ini, pukul 12.00–22.30 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp150.000 dan tidak ada diskon tambahan.</div>
+        <div class="faq-a" data-sale-date="Ini flash sale 1 hari eksklusif ({TANGGAL}, pukul 12.00–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp150.000 dan tidak ada diskon tambahan.">Ini flash sale 1 hari eksklusif (hari ini, pukul 12.00–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp150.000 dan tidak ada diskon tambahan.</div>
       </div>
     </div>
   </div>
@@ -1411,7 +1468,7 @@ footer .logo-small img {
   <!-- ===== FINAL CTA ===== -->
   <div class="section">
     <div class="final-box">
-      <div class="badge"><span class="dot"></span><span data-sale-date="Flash Sale Berakhir {TANGGAL} · Jam 22.30 WIB">Flash Sale Berakhir Hari Ini · Jam 22.30 WIB</span></div>
+      <div class="badge"><span class="dot"></span><span data-sale-date="Flash Sale Berakhir {TANGGAL} · Jam 22.00 WIB">Flash Sale Berakhir Hari Ini · Jam 22.00 WIB</span></div>
       <h2>Ambil Kendali atas<br>Keuanganmu Hari Ini</h2>
       <p class="hero-sub">Rp50.000 — harga segelas kopi premium. Bedanya, ValueSheets bekerja untuk keuanganmu seumur hidup.</p>
 
@@ -1425,7 +1482,7 @@ footer .logo-small img {
 
       <a class="cta-btn" href="https://lynk.id/valuesheets/d3ddd94dwk91" target="_blank" rel="noopener">
         <span class="cta-icon">⚡</span>
-        BELI SEKARANG — Rp50.000
+        <span class="cta-label">BELI SEKARANG — Rp50.000</span>
       </a>
       <div class="cta-sub" style="justify-content:center">
         <span class="ok">✓ Download instan</span>
@@ -1446,7 +1503,7 @@ footer .logo-small img {
       <img src="assets/logo.jpg" alt="ValueSheets">
     </div>
     <div>© 2026 Sultan Azriel Dafaris · Template Excel Keuangan Pribadi Indonesia 2024</div>
-    <div style="margin-top:4px" data-sale-date="Flash Sale: {TANGGAL} · Pukul 12.00–22.30 WIB · Stok 800 Unit">Flash Sale: Hari Ini · Pukul 12.00–22.30 WIB · Stok 800 Unit</div>
+    <div style="margin-top:4px" data-sale-date="Flash Sale: {TANGGAL} · Pukul 12.00–22.00 WIB · Stok 800 Unit">Flash Sale: Hari Ini · Pukul 12.00–22.00 WIB · Stok 800 Unit</div>
   </div>
 </footer>
 
@@ -1467,7 +1524,7 @@ function wibAt(hours, minutes) {
   return Date.UTC(y, m, d, hours - 7, minutes, 0);
 }
 const SALE_START = wibAt(12, 0);
-const SALE_END   = wibAt(22, 30);
+const SALE_END   = wibAt(22, 0);
 
 // Update label tanggal otomatis ke hari ini
 const BULAN_ID = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
@@ -1484,9 +1541,11 @@ function pad(n){ return String(n).padStart(2,'0') }
 function updateAll(){
   const now = Date.now();
 
+  // overlay "sale ended" tidak lagi dipakai — website tetap bisa dibrowse
+  document.getElementById('sale-ended-overlay').style.display = 'none';
+
   if(now < SALE_START){
     document.getElementById('sale-waiting-overlay').style.display = 'flex';
-    document.getElementById('sale-ended-overlay').style.display   = 'none';
     const diff = SALE_START - now;
     const h = Math.floor(diff / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
@@ -1496,21 +1555,23 @@ function updateAll(){
     document.getElementById('t-m').textContent = pad(m);
     document.getElementById('t-s').textContent = pad(s);
     document.getElementById('timer-status-msg').textContent = 'Belum dimulai';
+    document.body.classList.remove('sale-over');
     return;
   }
 
   if(now >= SALE_END){
-    document.getElementById('sale-ended-overlay').style.display   = 'flex';
+    // Sale berakhir — overlay tidak muncul, tapi semua indikator ditandai habis
     document.getElementById('sale-waiting-overlay').style.display = 'none';
     document.getElementById('t-h').textContent = '00';
     document.getElementById('t-m').textContent = '00';
     document.getElementById('t-s').textContent = '00';
-    document.getElementById('timer-status-msg').textContent = 'Flash sale berakhir';
+    document.getElementById('timer-status-msg').textContent = '🚫 PRODUK SUDAH HABIS';
+    document.body.classList.add('sale-over');
     return;
   }
 
   document.getElementById('sale-waiting-overlay').style.display = 'none';
-  document.getElementById('sale-ended-overlay').style.display   = 'none';
+  document.body.classList.remove('sale-over');
 
   const diff = SALE_END - now;
   const h = Math.floor(diff / 3600000);
@@ -1535,24 +1596,31 @@ const MAX_PCT = 30;
 function updateStock() {
   const now = Date.now();
   let pct = 0;
+  let habis = false;
 
   if (now < SALE_START) {
     pct = 0;
   } else if (now >= SALE_END) {
-    pct = MAX_PCT;
+    pct = 100;
+    habis = true;
   } else {
     const prog = (now - SALE_START) / (SALE_END - SALE_START);
     const s = prog < 0.5 ? 2*prog*prog : 1 - Math.pow(-2*prog+2,2)/2;
     pct = Math.round(s * MAX_PCT);
+    pct = Math.max(0, Math.min(MAX_PCT, pct));
   }
 
-  pct = Math.max(0, Math.min(MAX_PCT, pct));
-  const sold   = Math.round(TOTAL_STOCK * pct / 100);
-  const remain = TOTAL_STOCK - sold;
-
-  document.getElementById('stock-num').textContent  = remain.toLocaleString('id-ID');
-  document.getElementById('stock-fill').style.width = pct + '%';
-  document.getElementById('stock-pct').textContent  = pct + '% terjual';
+  if (habis) {
+    document.getElementById('stock-num').textContent  = '0';
+    document.getElementById('stock-fill').style.width = '100%';
+    document.getElementById('stock-pct').textContent  = 'SOLD OUT';
+  } else {
+    const sold   = Math.round(TOTAL_STOCK * pct / 100);
+    const remain = TOTAL_STOCK - sold;
+    document.getElementById('stock-num').textContent  = remain.toLocaleString('id-ID');
+    document.getElementById('stock-fill').style.width = pct + '%';
+    document.getElementById('stock-pct').textContent  = pct + '% terjual';
+  }
 }
 
 updateStock();
