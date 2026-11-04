@@ -1203,7 +1203,7 @@ body.sale-over .sold-out-banner { display: block }
   <div class="wait-logo">
     <img src="assets/logo.jpg" alt="ValueSheets">
   </div>
-  <h3>Flash Sale Dimulai Pukul 12.30 WIB</h3>
+  <h3>Flash Sale Dimulai Pukul 14.30 WIB</h3>
   <p>Halaman ini akan terbuka otomatis saat flash sale dimulai. Siapkan dirimu!</p>
   <div class="wait-time-display" id="wait-countdown">Menunggu...</div>
   <p style="font-size:0.8rem;margin-top:8px;color:var(--fg3);" data-sale-date="{TANGGAL} · Harga: Rp99.000 · Stok: 800 unit">Hari Ini · Harga: Rp99.000 · Stok: 800 unit</p>
@@ -1252,7 +1252,7 @@ body.sale-over .sold-out-banner { display: block }
     </div>
     <div class="logo-tagline">Personal Finance Indonesia</div>
 
-    <div class="badge" style="margin-top:22px"><span class="dot"></span><span data-sale-date="Flash Sale · {TANGGAL} · Jam 12.30–22.00 WIB">Flash Sale · Hari Ini · Jam 12.30–22.00 WIB</span></div>
+    <div class="badge" style="margin-top:22px"><span class="dot"></span><span data-sale-date="Flash Sale · {TANGGAL} · Jam 14.30–22.00 WIB">Flash Sale · Hari Ini · Jam 14.30–22.00 WIB</span></div>
 
     <h1>Kelola Keuangan<br>Seperti <em>Seorang CFO</em><br>dengan Satu File Excel</h1>
     <p class="hero-sub">Template keuangan pribadi paling lengkap di Indonesia — PPh 21 otomatis, BPJS terintegrasi, dashboard real-time. Dibuat khusus untuk regulasi Indonesia 2024. Sekali beli, pakai seumur hidup.</p>
@@ -1718,7 +1718,7 @@ body.sale-over .sold-out-banner { display: block }
       </div>
       <div class="faq-item">
         <div class="faq-q">Kenapa harganya hanya Rp99.000? <span class="faq-arr">▼</span></div>
-        <div class="faq-a" data-sale-date="Ini flash sale 1 hari eksklusif ({TANGGAL}, pukul 12.30–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp200.000 dan tidak ada diskon tambahan.">Ini flash sale 1 hari eksklusif (hari ini, pukul 12.30–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp200.000 dan tidak ada diskon tambahan.</div>
+        <div class="faq-a" data-sale-date="Ini flash sale 1 hari eksklusif ({TANGGAL}, pukul 14.30–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp200.000 dan tidak ada diskon tambahan.">Ini flash sale 1 hari eksklusif (hari ini, pukul 14.30–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp200.000 dan tidak ada diskon tambahan.</div>
       </div>
     </div>
   </div>
@@ -1761,7 +1761,7 @@ body.sale-over .sold-out-banner { display: block }
       <img src="assets/logo.jpg" alt="ValueSheets">
     </div>
     <div>© 2026 Sultan Azriel Dafaris · Template Excel Keuangan Pribadi Indonesia 2024</div>
-    <div style="margin-top:4px" data-sale-date="Flash Sale: {TANGGAL} · Pukul 12.30–22.00 WIB · Stok 800 Unit">Flash Sale: Hari Ini · Pukul 12.30–22.00 WIB · Stok 800 Unit</div>
+    <div style="margin-top:4px" data-sale-date="Flash Sale: {TANGGAL} · Pukul 14.30–22.00 WIB · Stok 800 Unit">Flash Sale: Hari Ini · Pukul 14.30–22.00 WIB · Stok 800 Unit</div>
   </div>
 </footer>
 
@@ -1781,7 +1781,7 @@ function wibAt(hours, minutes) {
   // Konstruksi waktu WIB (UTC+7) ke timestamp absolut
   return Date.UTC(y, m, d, hours - 7, minutes, 0);
 }
-const SALE_START = wibAt(12, 30);
+const SALE_START = wibAt(14, 30);
 const SALE_END   = wibAt(22, 0);
 
 // Update label tanggal otomatis ke hari ini
@@ -1846,26 +1846,35 @@ updateAll();
 setInterval(updateAll, 1000);
 
 // ============================================================
-//  SIMULATED STOCK — reset nol jam 12:30, naik perlahan dengan
-//  "lonjakan mendadak" (300, 400 ... ) untuk memancing audience
+//  SIMULATED STOCK — mulai jam 14:30 dengan minimal 200 terjual,
+//  lalu naik-turun "hidup" untuk memberi kesan aktif real-time
 // ============================================================
 const TOTAL_STOCK = 800;
-const MAX_SOLD    = 600;           // target akhir: 600 terjual (75%)
+const START_SOLD  = 200;           // mulai dengan 200 terjual (600 tersisa)
+const MAX_SOLD    = 650;           // target akhir: 650 terjual (150 tersisa)
 let   simulatedSold = 0;
-let   nextJumpAt    = 0;
+let   nextTickAt    = 0;
 
-function pickJumpInterval() {
-  // Jarak antar "pembelian baru": 6–22 detik, random
-  return 6000 + Math.random() * 16000;
+function pickTickInterval() {
+  // Jarak antar perubahan: 2–9 detik
+  return 2000 + Math.random() * 7000;
 }
 
-function pickJumpSize(progress) {
-  // 20% kemungkinan lonjakan besar (10–28 slot sekaligus)
-  // 80% kemungkinan lonjakan kecil (1–5 slot)
-  if (Math.random() < 0.22) {
-    return Math.floor(Math.random() * 19) + 10;  // 10–28
+function pickDelta(baseTarget, current) {
+  // Probabilitas: 70% naik, 20% turun (refund/cancel), 10% besar
+  const r = Math.random();
+  const belowBase = current < baseTarget;
+
+  if (r < 0.10) {
+    // Lonjakan besar naik (8–22 slot)
+    return Math.floor(Math.random() * 15) + 8;
   }
-  return Math.floor(Math.random() * 5) + 1;      // 1–5
+  if (r < 0.75 || belowBase) {
+    // Naik kecil (1–6 slot) — lebih sering kalau di bawah baseline
+    return Math.floor(Math.random() * 6) + 1;
+  }
+  // Turun kecil (1–4 slot) — "ada yang batal / refund"
+  return -(Math.floor(Math.random() * 4) + 1);
 }
 
 function renderStock(sold, isHabis) {
@@ -1882,16 +1891,17 @@ function renderStock(sold, isHabis) {
     return;
   }
 
-  // Animasi "tick" ketika angka turun (seolah ada yang beli)
+  // Animasi flash ketika angka berubah
   const prev = parseInt(num.textContent.replace(/\./g,'')) || remain;
-  if (remain < prev) {
+  if (remain !== prev) {
+    const naik = remain < prev;  // remain turun = ada yg beli
     num.style.transition = 'transform 0.25s ease, color 0.25s ease';
     num.style.transform  = 'scale(1.18)';
-    num.style.color      = '#FF7B73';
+    num.style.color      = naik ? '#FF7B73' : '#38C97A';
     setTimeout(() => {
       num.style.transform = 'scale(1)';
       num.style.color     = '';
-    }, 260);
+    }, 280);
   }
 
   num.textContent   = remain.toLocaleString('id-ID');
@@ -1904,7 +1914,7 @@ function updateStock() {
 
   if (now < SALE_START) {
     simulatedSold = 0;
-    nextJumpAt    = 0;
+    nextTickAt    = 0;
     renderStock(0, false);
     return;
   }
@@ -1914,32 +1924,31 @@ function updateStock() {
     return;
   }
 
-  // Inisialisasi target minimum berdasarkan progres waktu (S-curve)
+  // Inisialisasi awal: minimal START_SOLD saat sale mulai
+  if (simulatedSold === 0) {
+    simulatedSold = START_SOLD;
+    renderStock(simulatedSold, false);
+    nextTickAt = now + pickTickInterval();
+    return;
+  }
+
+  // Baseline yang bergerak dari START_SOLD → MAX_SOLD pakai S-curve
   const prog = (now - SALE_START) / (SALE_END - SALE_START);
   const s    = prog < 0.5 ? 2*prog*prog : 1 - Math.pow(-2*prog+2, 2)/2;
-  const baselineSold = Math.floor(s * MAX_SOLD);
+  const baseline = Math.floor(START_SOLD + s * (MAX_SOLD - START_SOLD));
 
-  // Jika simulatedSold tertinggal (misal user baru buka halaman di tengah sale),
-  // langsung catch-up ke baseline supaya realistis.
-  if (simulatedSold < baselineSold) {
-    simulatedSold = baselineSold;
+  if (nextTickAt === 0) nextTickAt = now + pickTickInterval();
+
+  if (now >= nextTickAt) {
+    const delta = pickDelta(baseline, simulatedSold);
+    simulatedSold = Math.max(START_SOLD, Math.min(MAX_SOLD, simulatedSold + delta));
+    nextTickAt = now + pickTickInterval();
+    renderStock(simulatedSold, false);
   }
-
-  // Jadwalkan lonjakan berikutnya jika belum
-  if (nextJumpAt === 0) nextJumpAt = now + pickJumpInterval();
-
-  // Eksekusi lonjakan mendadak
-  if (now >= nextJumpAt && simulatedSold < MAX_SOLD) {
-    const jump = pickJumpSize(prog);
-    simulatedSold = Math.min(MAX_SOLD, simulatedSold + jump);
-    nextJumpAt = now + pickJumpInterval();
-  }
-
-  renderStock(simulatedSold, false);
 }
 
 updateStock();
-setInterval(updateStock, 1500);   // tiap 1,5 detik — cek apakah waktu lonjakan
+setInterval(updateStock, 1000);   // cek setiap 1 detik
 
 // ============================================================
 //  FAQ
