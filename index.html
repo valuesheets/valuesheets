@@ -1206,7 +1206,7 @@ body.sale-over .sold-out-banner { display: block }
   <h3>Flash Sale Dimulai Pukul 14.30 WIB</h3>
   <p>Halaman ini akan terbuka otomatis saat flash sale dimulai. Siapkan dirimu!</p>
   <div class="wait-time-display" id="wait-countdown">Menunggu...</div>
-  <p style="font-size:0.8rem;margin-top:8px;color:var(--fg3);" data-sale-date="{TANGGAL} · Harga: Rp99.000 · Stok: 800 unit">Hari Ini · Harga: Rp99.000 · Stok: 800 unit</p>
+  <p style="font-size:0.8rem;margin-top:8px;color:var(--fg3);" data-sale-date="{TANGGAL} · Harga: Rp99.000 · Stok: 500 unit">Hari Ini · Harga: Rp99.000 · Stok: 500 unit</p>
 </div>
 
 <!-- SALE ENDED OVERLAY -->
@@ -1236,7 +1236,7 @@ body.sale-over .sold-out-banner { display: block }
       <div class="timer-unit-label">DETIK</div>
     </div>
   </div>
-  <span id="timer-status-msg">Hanya 800 slot!</span>
+  <span id="timer-status-msg">Hanya 500 slot!</span>
 </div>
 
 <div class="page-wrap">
@@ -1338,7 +1338,7 @@ body.sale-over .sold-out-banner { display: block }
     <!-- STOCK -->
     <div class="stock-wrap">
       <div class="stock-info">
-        <span class="stock-left"><span class="stock-inner">🔥 Tersisa <strong id="stock-num">800</strong> dari 800 slot</span><span class="stock-sold" style="display:none">Produk sudah habis</span></span>
+        <span class="stock-left"><span class="stock-inner">🔥 Tersisa <strong id="stock-num">500</strong> dari 500 slot</span><span class="stock-sold" style="display:none">Produk sudah habis</span></span>
         <span class="stock-pct" id="stock-pct">0% terjual</span>
       </div>
       <div class="stock-track">
@@ -1349,7 +1349,7 @@ body.sale-over .sold-out-banner { display: block }
 
     <div class="sold-out-banner">
       <strong>🚫 Produk Sudah Habis</strong>
-      <span>Flash sale telah berakhir. 800 slot sudah terjual semua. Nantikan restock berikutnya.</span>
+      <span>Flash sale telah berakhir. 500 slot sudah terjual semua. Nantikan restock berikutnya.</span>
     </div>
 
     <a class="cta-btn" href="https://lynk.id/valuesheets/d94zop4jyo71" target="_blank" rel="noopener">
@@ -1718,7 +1718,7 @@ body.sale-over .sold-out-banner { display: block }
       </div>
       <div class="faq-item">
         <div class="faq-q">Kenapa harganya hanya Rp99.000? <span class="faq-arr">▼</span></div>
-        <div class="faq-a" data-sale-date="Ini flash sale 1 hari eksklusif ({TANGGAL}, pukul 14.30–22.30 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp200.000 dan tidak ada diskon tambahan.">Ini flash sale 1 hari eksklusif (hari ini, pukul 14.30–22.30 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp200.000 dan tidak ada diskon tambahan.</div>
+        <div class="faq-a" data-sale-date="Ini flash sale 1 hari eksklusif ({TANGGAL}, pukul 14.30–22.30 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 500 unit. Setelah flash sale berakhir, harga kembali ke Rp200.000 dan tidak ada diskon tambahan.">Ini flash sale 1 hari eksklusif (hari ini, pukul 14.30–22.30 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 500 unit. Setelah flash sale berakhir, harga kembali ke Rp200.000 dan tidak ada diskon tambahan.</div>
       </div>
     </div>
   </div>
@@ -1761,7 +1761,7 @@ body.sale-over .sold-out-banner { display: block }
       <img src="assets/logo.jpg" alt="ValueSheets">
     </div>
     <div>© 2026 Sultan Azriel Dafaris · Template Excel Keuangan Pribadi Indonesia 2024</div>
-    <div style="margin-top:4px" data-sale-date="Flash Sale: {TANGGAL} · Pukul 14.30–22.30 WIB · Stok 800 Unit">Flash Sale: Hari Ini · Pukul 14.30–22.30 WIB · Stok 800 Unit</div>
+    <div style="margin-top:4px" data-sale-date="Flash Sale: {TANGGAL} · Pukul 14.30–22.30 WIB · Stok 500 Unit">Flash Sale: Hari Ini · Pukul 14.30–22.30 WIB · Stok 500 Unit</div>
   </div>
 </footer>
 
@@ -1839,7 +1839,7 @@ function updateAll(){
   document.getElementById('t-h').textContent = pad(h);
   document.getElementById('t-m').textContent = pad(m);
   document.getElementById('t-s').textContent = pad(s);
-  document.getElementById('timer-status-msg').textContent = 'Hanya 800 slot!';
+  document.getElementById('timer-status-msg').textContent = 'Hanya 500 slot!';
 }
 
 updateAll();
@@ -1849,9 +1849,9 @@ setInterval(updateAll, 1000);
 //  SIMULATED STOCK — mulai jam 14:30 dengan minimal 200 terjual,
 //  lalu naik-turun "hidup" untuk memberi kesan aktif real-time
 // ============================================================
-const TOTAL_STOCK = 800;
-const START_SOLD  = 200;           // mulai dengan 200 terjual (600 tersisa)
-const MAX_SOLD    = 650;           // target akhir: 650 terjual (150 tersisa)
+const TOTAL_STOCK = 500;
+const START_SOLD  = 125;           // mulai dengan 125 terjual (375 tersisa)
+const MAX_SOLD    = 420;           // target akhir: 420 terjual (80 tersisa)
 let   simulatedSold = 0;
 let   nextTickAt    = 0;
 
