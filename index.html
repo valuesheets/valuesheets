@@ -1069,7 +1069,7 @@ body.sale-over .sold-out-banner { display: block }
   <div class="wait-logo">
     <img src="assets/logo.jpg" alt="ValueSheets">
   </div>
-  <h3>Flash Sale Dimulai Pukul 12.00 WIB</h3>
+  <h3>Flash Sale Dimulai Pukul 12.30 WIB</h3>
   <p>Halaman ini akan terbuka otomatis saat flash sale dimulai. Siapkan dirimu!</p>
   <div class="wait-time-display" id="wait-countdown">Menunggu...</div>
   <p style="font-size:0.8rem;margin-top:8px;color:var(--fg3);" data-sale-date="{TANGGAL} · Harga: Rp50.000 · Stok: 800 unit">Hari Ini · Harga: Rp50.000 · Stok: 800 unit</p>
@@ -1118,7 +1118,7 @@ body.sale-over .sold-out-banner { display: block }
     </div>
     <div class="logo-tagline">Personal Finance Indonesia</div>
 
-    <div class="badge" style="margin-top:22px"><span class="dot"></span><span data-sale-date="Flash Sale · {TANGGAL} · Jam 12.00–22.00 WIB">Flash Sale · Hari Ini · Jam 12.00–22.00 WIB</span></div>
+    <div class="badge" style="margin-top:22px"><span class="dot"></span><span data-sale-date="Flash Sale · {TANGGAL} · Jam 12.30–22.00 WIB">Flash Sale · Hari Ini · Jam 12.30–22.00 WIB</span></div>
 
     <h1>Kelola Keuangan<br>Seperti <em>Seorang CFO</em><br>dengan Satu File Excel</h1>
     <p class="hero-sub">Template keuangan pribadi paling lengkap di Indonesia — PPh 21 otomatis, BPJS terintegrasi, dashboard real-time. Dibuat khusus untuk regulasi Indonesia 2024. Sekali beli, pakai seumur hidup.</p>
@@ -1460,7 +1460,7 @@ body.sale-over .sold-out-banner { display: block }
       </div>
       <div class="faq-item">
         <div class="faq-q">Kenapa harganya hanya Rp50.000? <span class="faq-arr">▼</span></div>
-        <div class="faq-a" data-sale-date="Ini flash sale 1 hari eksklusif ({TANGGAL}, pukul 12.00–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp150.000 dan tidak ada diskon tambahan.">Ini flash sale 1 hari eksklusif (hari ini, pukul 12.00–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp150.000 dan tidak ada diskon tambahan.</div>
+        <div class="faq-a" data-sale-date="Ini flash sale 1 hari eksklusif ({TANGGAL}, pukul 12.30–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp150.000 dan tidak ada diskon tambahan.">Ini flash sale 1 hari eksklusif (hari ini, pukul 12.30–22.00 WIB) untuk merayakan peluncuran resmi versi Indonesia. Stok diskon hanya 800 unit. Setelah flash sale berakhir, harga kembali ke Rp150.000 dan tidak ada diskon tambahan.</div>
       </div>
     </div>
   </div>
@@ -1503,7 +1503,7 @@ body.sale-over .sold-out-banner { display: block }
       <img src="assets/logo.jpg" alt="ValueSheets">
     </div>
     <div>© 2026 Sultan Azriel Dafaris · Template Excel Keuangan Pribadi Indonesia 2024</div>
-    <div style="margin-top:4px" data-sale-date="Flash Sale: {TANGGAL} · Pukul 12.00–22.00 WIB · Stok 800 Unit">Flash Sale: Hari Ini · Pukul 12.00–22.00 WIB · Stok 800 Unit</div>
+    <div style="margin-top:4px" data-sale-date="Flash Sale: {TANGGAL} · Pukul 12.30–22.00 WIB · Stok 800 Unit">Flash Sale: Hari Ini · Pukul 12.30–22.00 WIB · Stok 800 Unit</div>
   </div>
 </footer>
 
@@ -1523,7 +1523,7 @@ function wibAt(hours, minutes) {
   // Konstruksi waktu WIB (UTC+7) ke timestamp absolut
   return Date.UTC(y, m, d, hours - 7, minutes, 0);
 }
-const SALE_START = wibAt(12, 0);
+const SALE_START = wibAt(12, 30);
 const SALE_END   = wibAt(22, 0);
 
 // Update label tanggal otomatis ke hari ini
@@ -1588,43 +1588,100 @@ updateAll();
 setInterval(updateAll, 1000);
 
 // ============================================================
-//  SIMULATED STOCK — mulai 0% jam 12:00, naik ke 30% jam 22:30
+//  SIMULATED STOCK — reset nol jam 12:30, naik perlahan dengan
+//  "lonjakan mendadak" (300, 400 ... ) untuk memancing audience
 // ============================================================
 const TOTAL_STOCK = 800;
-const MAX_PCT = 30;
+const MAX_SOLD    = 600;           // target akhir: 600 terjual (75%)
+let   simulatedSold = 0;
+let   nextJumpAt    = 0;
+
+function pickJumpInterval() {
+  // Jarak antar "pembelian baru": 6–22 detik, random
+  return 6000 + Math.random() * 16000;
+}
+
+function pickJumpSize(progress) {
+  // 20% kemungkinan lonjakan besar (10–28 slot sekaligus)
+  // 80% kemungkinan lonjakan kecil (1–5 slot)
+  if (Math.random() < 0.22) {
+    return Math.floor(Math.random() * 19) + 10;  // 10–28
+  }
+  return Math.floor(Math.random() * 5) + 1;      // 1–5
+}
+
+function renderStock(sold, isHabis) {
+  const remain = Math.max(0, TOTAL_STOCK - sold);
+  const pct    = Math.min(100, Math.round(sold / TOTAL_STOCK * 100));
+  const num    = document.getElementById('stock-num');
+  const fill   = document.getElementById('stock-fill');
+  const label  = document.getElementById('stock-pct');
+
+  if (isHabis) {
+    num.textContent   = '0';
+    fill.style.width  = '100%';
+    label.textContent = 'SOLD OUT';
+    return;
+  }
+
+  // Animasi "tick" ketika angka turun (seolah ada yang beli)
+  const prev = parseInt(num.textContent.replace(/\./g,'')) || remain;
+  if (remain < prev) {
+    num.style.transition = 'transform 0.25s ease, color 0.25s ease';
+    num.style.transform  = 'scale(1.18)';
+    num.style.color      = '#FF7B73';
+    setTimeout(() => {
+      num.style.transform = 'scale(1)';
+      num.style.color     = '';
+    }, 260);
+  }
+
+  num.textContent   = remain.toLocaleString('id-ID');
+  fill.style.width  = pct + '%';
+  label.textContent = pct + '% terjual';
+}
 
 function updateStock() {
   const now = Date.now();
-  let pct = 0;
-  let habis = false;
 
   if (now < SALE_START) {
-    pct = 0;
-  } else if (now >= SALE_END) {
-    pct = 100;
-    habis = true;
-  } else {
-    const prog = (now - SALE_START) / (SALE_END - SALE_START);
-    const s = prog < 0.5 ? 2*prog*prog : 1 - Math.pow(-2*prog+2,2)/2;
-    pct = Math.round(s * MAX_PCT);
-    pct = Math.max(0, Math.min(MAX_PCT, pct));
+    simulatedSold = 0;
+    nextJumpAt    = 0;
+    renderStock(0, false);
+    return;
   }
 
-  if (habis) {
-    document.getElementById('stock-num').textContent  = '0';
-    document.getElementById('stock-fill').style.width = '100%';
-    document.getElementById('stock-pct').textContent  = 'SOLD OUT';
-  } else {
-    const sold   = Math.round(TOTAL_STOCK * pct / 100);
-    const remain = TOTAL_STOCK - sold;
-    document.getElementById('stock-num').textContent  = remain.toLocaleString('id-ID');
-    document.getElementById('stock-fill').style.width = pct + '%';
-    document.getElementById('stock-pct').textContent  = pct + '% terjual';
+  if (now >= SALE_END) {
+    renderStock(TOTAL_STOCK, true);
+    return;
   }
+
+  // Inisialisasi target minimum berdasarkan progres waktu (S-curve)
+  const prog = (now - SALE_START) / (SALE_END - SALE_START);
+  const s    = prog < 0.5 ? 2*prog*prog : 1 - Math.pow(-2*prog+2, 2)/2;
+  const baselineSold = Math.floor(s * MAX_SOLD);
+
+  // Jika simulatedSold tertinggal (misal user baru buka halaman di tengah sale),
+  // langsung catch-up ke baseline supaya realistis.
+  if (simulatedSold < baselineSold) {
+    simulatedSold = baselineSold;
+  }
+
+  // Jadwalkan lonjakan berikutnya jika belum
+  if (nextJumpAt === 0) nextJumpAt = now + pickJumpInterval();
+
+  // Eksekusi lonjakan mendadak
+  if (now >= nextJumpAt && simulatedSold < MAX_SOLD) {
+    const jump = pickJumpSize(prog);
+    simulatedSold = Math.min(MAX_SOLD, simulatedSold + jump);
+    nextJumpAt = now + pickJumpInterval();
+  }
+
+  renderStock(simulatedSold, false);
 }
 
 updateStock();
-setInterval(updateStock, 60000);
+setInterval(updateStock, 1500);   // tiap 1,5 detik — cek apakah waktu lonjakan
 
 // ============================================================
 //  FAQ
