@@ -648,6 +648,140 @@ h2 {
 .stat-num span { color: var(--green3) }
 .stat-label { font-size: 0.72rem; color: var(--fg2); font-weight: 600; line-height: 1.3 }
 
+/* ============ DESCRIPTION / REGULASI ============ */
+.desc-lead {
+  background: linear-gradient(135deg, rgba(45,134,83,0.1), rgba(13,31,60,0.3));
+  border: 1px solid rgba(45,134,83,0.25);
+  border-radius: 16px;
+  padding: 24px 26px;
+  margin-bottom: 28px;
+}
+.desc-lead p { color: var(--fg2); font-size: 0.95rem; line-height: 1.7; margin-bottom: 12px }
+.desc-lead p:last-child { margin-bottom: 0 }
+.desc-lead strong { color: var(--white); font-weight: 700 }
+
+.regulasi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+@media (max-width: 480px) { .regulasi-grid { grid-template-columns: 1fr } }
+.reg-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 3px solid var(--green3);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.reg-card h4 {
+  color: var(--white); font-size: 0.92rem; font-weight: 800;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.reg-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px }
+.reg-card li {
+  font-size: 0.82rem; color: var(--fg2); line-height: 1.55;
+  padding-left: 16px; position: relative;
+}
+.reg-card li::before {
+  content: '•'; position: absolute; left: 0; top: 0;
+  color: var(--green3); font-weight: 900;
+}
+.reg-card li strong { color: var(--fg); font-weight: 700 }
+
+/* ============ SHEET TABLE ============ */
+.sheet-table-wrap {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  overflow-x: auto;
+  margin-bottom: 28px;
+}
+.sheet-table {
+  width: 100%; border-collapse: collapse;
+  min-width: 480px;
+}
+.sheet-table thead th {
+  background: rgba(45,134,83,0.08);
+  color: var(--green3);
+  font-size: 0.7rem; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 11px 16px; text-align: left;
+  border-bottom: 1px solid rgba(45,134,83,0.2);
+}
+.sheet-table tbody td {
+  padding: 10px 16px;
+  font-size: 0.83rem; color: var(--fg2);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sheet-table tbody tr:hover td { background: rgba(45,134,83,0.05) }
+.sheet-table tbody tr:last-child td { border-bottom: none }
+.sheet-table .sheet-no {
+  color: var(--green3); font-weight: 800;
+  font-variant-numeric: tabular-nums; width: 42px;
+}
+.sheet-table .sheet-name {
+  color: var(--white); font-weight: 700;
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+/* ============ AUDIENCE ============ */
+.audience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 28px;
+}
+@media (max-width: 480px) { .audience-grid { grid-template-columns: 1fr } }
+.aud-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex; align-items: center; gap: 12px;
+  transition: border-color 0.2s;
+}
+.aud-card:hover { border-color: rgba(45,134,83,0.35) }
+.aud-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--green), var(--green2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(45,134,83,0.25);
+}
+.aud-text { font-size: 0.85rem; color: var(--fg); font-weight: 600; line-height: 1.4 }
+
+/* ============ SPEC CARD ============ */
+.spec-card {
+  background: linear-gradient(135deg, rgba(45,134,83,0.08), rgba(13,31,60,0.4));
+  border: 1px solid rgba(45,134,83,0.3);
+  border-radius: 16px;
+  padding: 22px 24px;
+}
+.spec-card h4 {
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--green3); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.spec-card h4::after {
+  content: ''; flex: 1; height: 1px; background: rgba(45,134,83,0.3);
+}
+.spec-list { display: grid; gap: 10px }
+.spec-row {
+  display: grid; grid-template-columns: 110px 1fr;
+  gap: 14px; font-size: 0.85rem;
+  padding: 7px 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.06);
+}
+.spec-row:last-child { border-bottom: none }
+.spec-row dt { color: var(--fg3); font-weight: 600 }
+.spec-row dd { color: var(--fg); margin: 0; font-weight: 500 }
+.spec-row dd strong { color: var(--white) }
+@media (max-width: 480px) {
+  .spec-row { grid-template-columns: 1fr }
+  .spec-row dt { color: var(--green3); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 800 }
+}
+
 /* ============ TESTIMONIALS ============ */
 .testi-list { display: flex; flex-direction: column; gap: 14px }
 .testi-card {
@@ -1321,6 +1455,130 @@ body.sale-over .sold-out-banner { display: block }
       <div class="feat-card"><span class="feat-em">🎯</span><div><div class="feat-title">Perencana Tujuan</div><div class="feat-desc">Set target DP rumah, dana pendidikan, liburan — dengan timeline dan proyeksi pencapaian</div></div></div>
       <div class="feat-card"><span class="feat-em">🏖️</span><div><div class="feat-title">Dana Pensiun</div><div class="feat-desc">Proyeksi dana pensiun + integrasi DPLK & BPJS Ketenagakerjaan secara akurat</div></div></div>
       <div class="feat-card"><span class="feat-em">🏠</span><div><div class="feat-title">Dashboard Utama</div><div class="feat-desc">Semua indikator keuangan dalam satu tampilan — seperti punya CFO dashboard pribadi</div></div></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ===== DESKRIPSI LENGKAP ===== -->
+  <div class="section">
+    <div class="section-eye">Deskripsi Lengkap</div>
+    <h2>Sistem Perencanaan Keuangan<br>Pribadi — Khusus Indonesia</h2>
+    <p class="section-sub">Dirancang berbasis regulasi 2026, dipakai sekali pakai selamanya.</p>
+
+    <div class="desc-lead">
+      <p><strong>ValueSheets Personal Finance Indonesia</strong> adalah sistem perencanaan keuangan pribadi berbasis Microsoft Excel yang dirancang khusus untuk pasar Indonesia. Dengan <strong>22 sheet yang saling terhubung otomatis</strong>, cukup isi satu sheet Pengaturan — semua kalkulasi gaji, pajak, dan BPJS langsung berjalan sendiri.</p>
+      <p>Cocok untuk <strong>karyawan swasta, PNS, maupun freelancer</strong> yang ingin mengelola keuangan secara terstruktur tanpa perlu skill akuntansi.</p>
+    </div>
+
+    <div class="section-eye" style="margin-top:36px">Regulasi 2026 — Sudah Built-In</div>
+    <h2 style="font-size:1.35rem;margin-bottom:18px">Kalkulasi Pajak & BPJS Otomatis</h2>
+
+    <div class="regulasi-grid">
+      <div class="reg-card">
+        <h4>🏛️ PPh 21 Progresif</h4>
+        <ul>
+          <li>Sesuai <strong>UU HPP No.7/2021</strong></li>
+          <li>Tarif: 5% / 15% / 25% / 30% / 35%</li>
+          <li>PTKP 2026: TK/0 Rp54 jt s.d. K/3 Rp72 jt/tahun</li>
+        </ul>
+      </div>
+      <div class="reg-card">
+        <h4>🏥 BPJS Kesehatan</h4>
+        <ul>
+          <li><strong>1%</strong> karyawan + <strong>4%</strong> perusahaan</li>
+          <li>Dasar hukum: Perpres 64/2020</li>
+          <li>Batas atas upah mengikuti ketentuan terbaru</li>
+        </ul>
+      </div>
+      <div class="reg-card">
+        <h4>💼 BPJS JHT (Jaminan Hari Tua)</h4>
+        <ul>
+          <li><strong>2%</strong> karyawan + <strong>3,7%</strong> perusahaan</li>
+          <li>Terintegrasi dengan proyeksi pensiun</li>
+          <li>Rekap saldo otomatis per tahun</li>
+        </ul>
+      </div>
+      <div class="reg-card">
+        <h4>🏖️ BPJS JP (Jaminan Pensiun)</h4>
+        <ul>
+          <li><strong>1%</strong> karyawan + <strong>2%</strong> perusahaan</li>
+          <li>Batas upah: <strong>Rp10.547.400/bulan</strong> (2026)</li>
+          <li>JKK: 0,10%–1,60% sesuai risiko usaha</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-eye" style="margin-top:36px">22 Sheet Lengkap</div>
+    <h2 style="font-size:1.35rem;margin-bottom:18px">Semua Sheet dalam Workbook</h2>
+
+    <div class="sheet-table-wrap">
+      <table class="sheet-table">
+        <thead>
+          <tr><th class="sheet-no">#</th><th>Sheet</th><th>Fungsi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="sheet-no">—</td><td class="sheet-name">📖 Tutorial</td><td>Panduan penggunaan 5 langkah</td></tr>
+          <tr><td class="sheet-no">0</td><td class="sheet-name">⚙️ Pengaturan</td><td>Hub utama — input gaji & profil pajak</td></tr>
+          <tr><td class="sheet-no">1</td><td class="sheet-name">💵 Sumber Penghasilan</td><td>Gaji, freelance, bisnis, penghasilan pasif</td></tr>
+          <tr><td class="sheet-no">2</td><td class="sheet-name">🧾 Slip Gaji</td><td>Simulasi slip gaji bulanan otomatis</td></tr>
+          <tr><td class="sheet-no">3</td><td class="sheet-name">🏛️ PPh 21</td><td>Detail kalkulasi pajak progresif</td></tr>
+          <tr><td class="sheet-no">4</td><td class="sheet-name">💎 Kekayaan Bersih</td><td>Net worth tracker lengkap</td></tr>
+          <tr><td class="sheet-no">5</td><td class="sheet-name">📋 Anggaran Bulanan</td><td>Rencana vs realisasi pengeluaran</td></tr>
+          <tr><td class="sheet-no">6</td><td class="sheet-name">💸 Pelacak Pengeluaran</td><td>Catatan harian per kategori</td></tr>
+          <tr><td class="sheet-no">7</td><td class="sheet-name">🔄 Langganan</td><td>Monitor subscription bulanan/tahunan</td></tr>
+          <tr><td class="sheet-no">8</td><td class="sheet-name">📅 Kalender Tagihan</td><td>Jadwal jatuh tempo tagihan</td></tr>
+          <tr><td class="sheet-no">9</td><td class="sheet-name">🏦 Pelacak Tabungan</td><td>Progres tabungan darurat & tujuan</td></tr>
+          <tr><td class="sheet-no">10</td><td class="sheet-name">🎯 Perencana Tujuan</td><td>Target keuangan jangka pendek & panjang</td></tr>
+          <tr><td class="sheet-no">11</td><td class="sheet-name">💳 Pelunasan Utang</td><td>Strategi avalanche/snowball</td></tr>
+          <tr><td class="sheet-no">12</td><td class="sheet-name">📊 Skor Kredit</td><td>Histori BI Checking / SLIK OJK</td></tr>
+          <tr><td class="sheet-no">13</td><td class="sheet-name">📈 Investasi</td><td>Portofolio saham, reksa dana, emas</td></tr>
+          <tr><td class="sheet-no">14</td><td class="sheet-name">🏖️ Dana Pensiun</td><td>Proyeksi pensiun + DPLK/BPJS</td></tr>
+          <tr><td class="sheet-no">15</td><td class="sheet-name">🌊 Proyeksi Arus Kas</td><td>Forecast cash flow 12 bulan</td></tr>
+          <tr><td class="sheet-no">16</td><td class="sheet-name">📆 Ringkasan Bulanan</td><td>Rekap otomatis per bulan</td></tr>
+          <tr><td class="sheet-no">17</td><td class="sheet-name">📉 Laporan Tahunan</td><td>Laporan keuangan tahunan</td></tr>
+          <tr><td class="sheet-no">18</td><td class="sheet-name">🤝 Bagi Tagihan</td><td>Hitung tagihan bersama (kos, liburan)</td></tr>
+          <tr><td class="sheet-no">19</td><td class="sheet-name">🏠 Dashboard</td><td>Semua indikator dalam satu tampilan</td></tr>
+          <tr><td class="sheet-no">20</td><td class="sheet-name">🌍 Referensi Pajak</td><td>Tarif PPh, PTKP 2026, BPJS, UMR per provinsi</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-eye" style="margin-top:36px">🎯 Cocok Untuk</div>
+    <h2 style="font-size:1.35rem;margin-bottom:18px">Siapa yang Harus Punya ValueSheets?</h2>
+
+    <div class="audience-grid">
+      <div class="aud-card">
+        <div class="aud-icon">👔</div>
+        <div class="aud-text">Karyawan swasta / PNS yang ingin memahami slip gaji dan pajak</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-icon">🎓</div>
+        <div class="aud-text">Fresh graduate yang baru mulai bekerja</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-icon">💻</div>
+        <div class="aud-text">Freelancer & pekerja dengan penghasilan ganda</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-icon">📈</div>
+        <div class="aud-text">Siapa saja yang ingin mulai investasi & merencanakan pensiun</div>
+      </div>
+    </div>
+
+    <div class="section-eye" style="margin-top:36px">🔧 Spesifikasi</div>
+    <h2 style="font-size:1.35rem;margin-bottom:18px">Detail Teknis Produk</h2>
+
+    <div class="spec-card">
+      <h4>Informasi Produk</h4>
+      <dl class="spec-list">
+        <div class="spec-row"><dt>Format</dt><dd><strong>Microsoft Excel (.xlsx)</strong></dd></div>
+        <div class="spec-row"><dt>Jumlah Sheet</dt><dd>22 sheet terintegrasi dengan formula otomatis</dd></div>
+        <div class="spec-row"><dt>Sistem Warna</dt><dd>🟡 Kuning (input) · 🔵 Biru (formula otomatis) · 🟢 Hijau (subheader)</dd></div>
+        <div class="spec-row"><dt>Regulasi</dt><dd>PPh 21 UU HPP 2021 · PTKP 2026 · BPJS 2026 · UMR per provinsi</dd></div>
+        <div class="spec-row"><dt>Bahasa</dt><dd>Indonesia</dd></div>
+        <div class="spec-row"><dt>Kompatibel</dt><dd>Excel Windows, Mac, & Google Sheets</dd></div>
+      </dl>
     </div>
   </div>
 
